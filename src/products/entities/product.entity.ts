@@ -25,6 +25,6 @@ export class Product {
   @Column()
   initial_qty: number;
 
-  @OneToMany(() => UOM, (uom) => uom.product, { cascade: true })
+  @OneToMany(() => UOM, (uom) => uom.product, { onDelete: 'CASCADE' })
   uoms: UOM[];
 }
