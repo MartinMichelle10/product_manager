@@ -1,12 +1,9 @@
-import dotenv from 'dotenv';
 import { hostname } from 'os';
 
 import { PRODUCTION } from './env';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('./../../package.json');
-
-dotenv.config();
 
 const appName = `product_manager`;
 
@@ -52,6 +49,21 @@ const config = {
       serviceName: 'session-worker',
       serverUrl: `${process.env.APM_URL}:${process.env.APM_PORT}`,
       environment: process.env.NODE_ENV,
+    },
+    database: {
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'rootroot',
+      database: 'product_crud',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: false, // set to true for auto-migration in development, but use with caution in production
+      migrationsTableName: 'typeorm_migrations',
+      migrations: ['dist/migrations/*{.ts,.js}'],
+      // cli: {
+      //   migrationsDir: 'src/migrations',
+      // },
     },
   },
 };
