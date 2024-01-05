@@ -12,7 +12,7 @@ export class ProductsService {
     private productRepository: Repository<Product>,
   ) {}
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    return createProductDto;
   }
 
   async findAll() {
@@ -47,7 +47,7 @@ export class ProductsService {
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return { updateProductDto, id };
   }
 
   async remove(id: number) {
