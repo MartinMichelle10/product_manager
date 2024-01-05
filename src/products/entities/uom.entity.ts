@@ -20,15 +20,17 @@ export class UOM {
   @Column()
   name: string;
 
-  @ManyToOne(() => Product, (product) => product.uoms)
+  @ManyToOne(() => Product, (product) => product.uoms, { onDelete: 'CASCADE' })
   product: Product;
 
-  @OneToMany(() => UOMImage, (image) => image.uom)
+  @OneToMany(() => UOMImage, (image) => image.uom, { onDelete: 'CASCADE' })
   images: UOMImage[];
 
-  @OneToMany(() => UOMBarcodeRelation, (barcode) => barcode.uom)
+  @OneToMany(() => UOMBarcodeRelation, (barcode) => barcode.uom, {
+    onDelete: 'CASCADE',
+  })
   barcodes: UOMBarcodeRelation[];
 
-  @ManyToOne(() => Addon, (addon) => addon.uoms)
+  @ManyToOne(() => Addon, (addon) => addon.uoms, { onDelete: 'CASCADE' })
   addon: Addon;
 }

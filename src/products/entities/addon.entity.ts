@@ -26,6 +26,8 @@ export class Addon {
   @OneToMany(() => UOM, (uom) => uom.addon)
   uoms: UOM[];
 
-  @OneToMany(() => AddonItem, (addonItem) => addonItem.addon, { cascade: true })
+  @OneToMany(() => AddonItem, (addonItem) => addonItem.addon, {
+    onDelete: 'CASCADE',
+  })
   addonItems: AddonItem[];
 }
