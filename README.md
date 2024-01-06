@@ -3,45 +3,56 @@
    - [Installation](#installation)
    - [Usage](#usage)
 
+# Product CRUD Operations Node.js Application
+
 ## Introduction
 
-Product CRUD Operations
+This Node.js application is designed to manage products with a complex structure. The product structure includes relationships with Unit of Measure (UOM), UOM Image, UOM Barcode Relation, Addons, and Addon Items. The application provides CRUD operations to create, retrieve, update, and delete products along with their associated UOMs, Barcodes, Images, Addons, and Addon Items.
 
-Objective: Assess the candidate's ability to design and implement CRUD operations for a
-complex product structure in a Node.js application.
-Task: Design a Node.js application that manages products with the following structure:
-Products linked to UOM (Unit of Measure), where each UOM is linked to UOM Image and
-UOM Barcode Relation. Additionally, each UOM is linked to Addon, and Addons can have
-multiple Addon Items.
-Implement the following CRUD operations:
+## Installation
 
-1. Create a new product with multiple UOMs, Barcodes, and Images.
-2. Retrieve product information along with its associated UOMs, Barcodes, and Images.
-3. Update the details of a product, including its UOMs, Barcodes, and Images.
-4. Delete a product and ensure the cascading deletion of associated UOMs, Barcodes,
-   Images, Addons, and Addon Items.
-   Expectations: The candidate should demonstrate a solid understanding of relational
-   database design, CRUD operations, and the ability to handle complex relationships between
-   tables
+Follow the steps below to install and set up the project:
 
+1. Run the following command to install dependencies:
 
-### Installation
+    ```bash
+    npm install
+    ```
 
-Include step-by-step instructions on how to install your project. This may include dependencies, environment setup, or any specific configurations.
+2. Create a `.env` file in the root directory and set up environment variables if necessary.
 
-1. istall node libraries
-2. create .env file
-3. dependencies (rabbitMQ)
-4. npm run dev
+3. Install RabbitMQ as a dependency if not already installed, as the application uses it for handling asynchronous tasks. [RabbitMQ Installation Guide](https://www.rabbitmq.com/download.html)
 
+4. Run the following command to start the development server:
 
-```bash
-# Example installation commands
-npm install
+    ```bash
+    npm run dev
+    ```
 
-npm run dev
+5. Access the application at `localhost:3000` and explore the API documentation at `localhost:3000/api`.
 
-```
+## API Documentation
 
-url: localhost:3000
-docs url: localhost:3000/api
+The API documentation provides details on the available endpoints and their usage. You can access it at `localhost:3000/api`.
+
+## CRUD Operations
+
+### 1. Create a New Product
+
+To create a new product with multiple UOMs, Barcodes, and Images, send a POST request to the `/products` endpoint with the necessary data.
+
+### 2. Retrieve Product Information
+
+Retrieve detailed information about a product, including its associated UOMs, Barcodes, and Images, by sending a GET request to the `/products/{productId}` endpoint.
+
+### 3. Update Product Details
+
+Update the details of a product, including its UOMs, Barcodes, and Images, by sending a PUT request to the `/products/{productId}` endpoint with the updated data.
+
+### 4. Delete a Product
+
+Delete a product and ensure the cascading deletion of associated UOMs, Barcodes, Images, Addons, and Addon Items by sending a DELETE request to the `/products/{productId}` endpoint.
+
+## Expectations
+
+This application showcases a solid understanding of relational database design, CRUD operations, and the ability to handle complex relationships between tables. The candidate is expected to navigate the API endpoints as documented and perform CRUD operations seamlessly.
