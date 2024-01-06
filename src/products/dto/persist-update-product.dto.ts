@@ -1,13 +1,16 @@
 type Image = {
   imageUrl: string;
+  id: number;
 };
 
 type Barcode = {
   barcode: string;
+  id: number;
 };
 
 type Addon = {
   name: string;
+  id: number;
 };
 
 type UOM = {

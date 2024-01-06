@@ -53,12 +53,5 @@ export class AppModule implements OnApplicationBootstrap {
       await this.barcodeSeeder.seed(),
       await this.imageSeeder.seed(),
     ]);
-
-    // await this.productSeeder.seed();
-    // await this.addonItemSeeder.seed();
-    // await this.addonSeeder.seed();
-    // await this.barcodeSeeder.seed();
-    // await this.uOMSeeder.seed();
-    // await this.imageSeeder.seed();
   }
 }

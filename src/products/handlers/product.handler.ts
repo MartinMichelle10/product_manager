@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateProductDto } from '../dto';
+import { CreateProductDto, UpdateProductDto } from '../dto';
 import { ProductsService } from '../services/products.service';
 import { ProductTransformer } from '../transformers/product.transformer';
 import { PersistProductPublisher } from '../publishers/product-persister.publisher';
@@ -15,7 +15,7 @@ export class ProductHandler {
     private readonly persistProductPublisher: PersistProductPublisher,
   ) {}
 
-  async handleCreate(data: UpdateProductDto) {
+  async handleCreate(data: CreateProductDto) {
     const event = this.productTransformer.transformCreate(data);
     const product: Product = await this.productService.create(event.product);
     this.persistProductPublisher.sendCreate({
@@ -30,7 +30,6 @@ export class ProductHandler {
   async handleUpdate(productId: number, data: UpdateProductDto) {
     const event = this.productTransformer.transformUpdate(productId, data);
     const product = await this.productService.update(productId, event.product);
-    //const uom = await this.uomService.update(event.uoms);
     this.persistProductPublisher.sendUpdate({
       uoms: event.uoms,
       product,

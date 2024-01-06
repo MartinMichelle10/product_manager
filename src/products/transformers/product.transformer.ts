@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateProductDto } from '../dto';
+import { CreateProductDto, UpdateProductDto } from '../dto';
 
 @Injectable()
 export class ProductTransformer {
-  transformCreate(dependenciesDto: UpdateProductDto) {
+  transformCreate(dependenciesDto: CreateProductDto) {
     const { name, uoms } = dependenciesDto;
     const newUoms = this.convertImagesArray(uoms);
 

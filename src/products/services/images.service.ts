@@ -14,4 +14,12 @@ export class ImagesService {
   create(images: ImageDto[]) {
     return this.imageRepository.save(images);
   }
+
+  update(images: ImageDto[]) {
+    for (const data of images) {
+      const _img = { name: data.imageUrl, id: data.id };
+      this.imageRepository.update(data.id, _img);
+    }
+    return true;
+  }
 }

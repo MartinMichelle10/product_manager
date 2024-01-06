@@ -27,24 +27,23 @@ export class PersistUpdateProductHandler {
 
   private async processUOM(uom, product) {
     // TODO: handle transactions
-    console.log('processUOM', uom);
+    //console.log('processUOM', uom);
     try {
-      const [insertedImages, insertedBarcodes, insertedAddon] =
-        await Promise.all([
-          this.imageService.create(uom.images),
-          this.barcodeService.create(uom.barcodes),
-          this.addonService.create(uom.addon),
-        ]);
+      const [updatedImages, updatedBarcodes, updatedAddon] = await Promise.all([
+        this.imageService.update(uom.images),
+        this.barcodeService.update(uom.barcodes),
+        this.addonService.update(uom.addon),
+      ]);
 
       const uomWithImages = {
         ...uom,
-        images: insertedImages,
+        images: updatedImages,
         product,
-        barcodes: insertedBarcodes,
-        addon: insertedAddon,
+        barcodes: updatedBarcodes,
+        addon: updatedAddon,
       };
 
-      const result = await this.uomService.create(uomWithImages);
+      const result = await this.uomService.update(uomWithImages);
       return result;
     } catch (error) {
       // Handle any errors that may occur during the process

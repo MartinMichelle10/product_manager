@@ -11,12 +11,14 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from '../services/products.service';
 
-import { UpdateProductDto } from '../dto';
+import { CreateProductDto, UpdateProductDto } from '../dto';
 
 import { UpdateInterceptor } from '../../middleware/update.interceptor';
 import { ProductHandler } from '../handlers/product.handler';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
+@ApiTags('products')
 export class ProductsController {
   constructor(
     private readonly productsService: ProductsService,
@@ -24,12 +26,22 @@ export class ProductsController {
   ) {}
 
   @Post()
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
   @UseInterceptors(new UpdateInterceptor('Created'))
-  create(@Body(new ValidationPipe()) createProductDto: UpdateProductDto) {
+  create(@Body(new ValidationPipe()) createProductDto: CreateProductDto) {
     return this.createProductHandler.handleCreate(createProductDto);
   }
 
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully retrived.',
+  })
+  @ApiResponse({ status: 204, description: 'No Content.' })
   findAll() {
     try {
       return this.productsService.getProducts();
@@ -39,6 +51,11 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully retrived.',
+  })
+  @ApiResponse({ status: 204, description: 'No Content.' })
   async findOne(@Param('id') id: string) {
     try {
       return await this.productsService.getProductById(+id);
@@ -49,6 +66,11 @@ export class ProductsController {
 
   // TODO: update
   @Patch(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully updated.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
   @UseInterceptors(new UpdateInterceptor('Updated'))
   update(
     @Param('id') id: number,
@@ -62,6 +84,11 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'The record has been successfully deleted.',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
   @UseInterceptors(new UpdateInterceptor('Deleted'))
   remove(@Param('id') id: string) {
     try {
