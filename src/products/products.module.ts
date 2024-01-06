@@ -18,13 +18,20 @@ import { CreateProductHandler } from './handlers/create-product.handler';
 import { CreateProductTransformer } from './transformers/create_product.transformer';
 import { PersistCreateProductPublisher } from 'src/publishers/product-persister.publisher';
 import { RmqModule } from 'src/rmq/rmq.module';
-import { PersistCreateProductSubscriber } from 'src/subscribers/persist_product_create.subscriber';
+import { PersistCreateProductSubscriber } from '../subscribers/persist_product_create.subscriber';
 import { UomService } from './services/uom.service';
+import { ImagesService } from './services/images.service';
+import { UOMBarcodeService } from './services/barcode.service';
+import { PersistCreateProductHandler } from './handlers/persist-create-product.handler';
+import { AddonService } from './services/addons.service';
 
 @Module({
   controllers: [ProductsController, PersistCreateProductSubscriber],
   providers: [
     ProductsService,
+    UOMBarcodeService,
+    ImagesService,
+    AddonService,
     UomService,
     ProductSeeder,
     AddonItemSeeder,
@@ -36,6 +43,7 @@ import { UomService } from './services/uom.service';
     CreateProductTransformer,
     PersistCreateProductPublisher,
     PersistCreateProductSubscriber,
+    PersistCreateProductHandler,
   ],
   imports: [
     RmqModule,

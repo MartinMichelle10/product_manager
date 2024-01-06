@@ -29,7 +29,7 @@ class Addon {
   name: string;
 }
 
-class UOM {
+export class UOM {
   @IsString()
   name: string;
 

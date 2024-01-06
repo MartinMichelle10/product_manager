@@ -17,10 +17,10 @@ export class Addon {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
-  @Column()
+  @Column({ nullable: true })
   isValid: boolean;
 
   @OneToMany(() => UOM, (uom) => uom.addon)
