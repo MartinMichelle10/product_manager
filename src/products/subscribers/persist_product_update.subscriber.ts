@@ -12,7 +12,6 @@ export class PersistUpdateProductSubscriber {
 
   @RabbitSubscribe(Bindings.PERSIST_UPDATE_PRODUCT_REQUESTED)
   async persistCreateProduct(@RabbitPayload() msgDto: PersistUpdateProductDto) {
-    console.log('msgDto', msgDto);
     return this.persistUpdateProductHandler.handle(msgDto);
   }
 }

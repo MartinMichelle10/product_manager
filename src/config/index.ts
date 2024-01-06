@@ -50,7 +50,7 @@ const config = {
       },
     },
     connection: {
-      serviceName: 'session-worker',
+      serviceName: 'product_manager',
       serverUrl: `${process.env.APM_URL}:${process.env.APM_PORT}`,
       environment: process.env.NODE_ENV,
     },

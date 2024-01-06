@@ -11,7 +11,6 @@ export class UomService {
   ) {}
 
   create(uom: any) {
-    console.log(uom);
     return this.uomRepository.save(uom);
   }
   update(uoms: UOM[]) {

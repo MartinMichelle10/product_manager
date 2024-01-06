@@ -27,7 +27,6 @@ export class PersistUpdateProductHandler {
 
   private async processUOM(uom, product) {
     // TODO: handle transactions
-    //console.log('processUOM', uom);
     try {
       const [updatedImages, updatedBarcodes, updatedAddon] = await Promise.all([
         this.imageService.update(uom.images),
