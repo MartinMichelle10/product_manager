@@ -17,30 +17,37 @@ export class PersistCreateProductHandler {
     const { product, uoms } = data;
 
     const uomPromises = uoms.map(async (uom) => {
-      try {
-        const [insertedImages, insertedBarcodes, insertedAddon] =
-          await Promise.all([
-            this.imageService.create(uom.images),
-            this.barcodeService.create(uom.barcodes),
-            this.addonService.create(uom.addon),
-          ]);
-
-        const uomWithImages = {
-          ...uom,
-          images: insertedImages,
-          product,
-          barcodes: insertedBarcodes,
-          addon: insertedAddon,
-        };
-
-        return this.uomService.create(uomWithImages);
-      } catch (error) {
-        console.error('Error processing uom:', error);
-      }
+      this.processUOM(uom, product);
     });
 
     const results = await Promise.allSettled(uomPromises);
 
     return results;
+  }
+
+  private async processUOM(uom, product) {
+    try {
+      const [insertedImages, insertedBarcodes, insertedAddon] =
+        await Promise.all([
+          this.imageService.create(uom.images),
+          this.barcodeService.create(uom.barcodes),
+          this.addonService.create(uom.addon),
+        ]);
+
+      const uomWithImages = {
+        ...uom,
+        images: insertedImages,
+        product,
+        barcodes: insertedBarcodes,
+        addon: insertedAddon,
+      };
+
+      const result = await this.uomService.create(uomWithImages);
+      return result;
+    } catch (error) {
+      // Handle any errors that may occur during the process
+      console.error('Error processing UOM with images:', error);
+      throw error; // Rethrow the error for the calling code to handle
+    }
   }
 }

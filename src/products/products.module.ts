@@ -1,29 +1,42 @@
 import { Module } from '@nestjs/common';
-import { ProductsService } from './services/products.service';
-import { ProductsController } from './controllers/products.controller';
-import { Product } from './entities/product.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductSeeder } from './seeders/product.seeder';
-import { AddonItemSeeder } from './seeders/addonItem.seeder';
-import { AddonSeeder } from './seeders/addon.seeder';
-import { BarcodeSeeder } from './seeders/barcodes.seeder';
-import { UOMSeeder } from './seeders/uom.seeder';
-import { ImageSeeder } from './seeders/images.seeder';
-import { Addon } from './entities/addon.entity';
-import { AddonItem } from './entities/addon-item.entity';
-import { UOMImage } from './entities/uom-image.entity';
-import { UOMBarcode } from './entities/uom-barcode.entity';
-import { UOM } from './entities/uom.entity';
-import { CreateProductHandler } from './handlers/create-product.handler';
-import { CreateProductTransformer } from './transformers/create_product.transformer';
-import { PersistCreateProductPublisher } from 'src/publishers/product-persister.publisher';
+import { ProductsController } from './controllers/products.controller';
+
+import {
+  Product,
+  Addon,
+  AddonItem,
+  UOMImage,
+  UOMBarcode,
+  UOM,
+} from './entities';
+
+import {
+  ProductSeeder,
+  AddonItemSeeder,
+  AddonSeeder,
+  BarcodeSeeder,
+  UOMSeeder,
+  ImageSeeder,
+} from './seeders';
+
+import { CreateProductHandler, PersistCreateProductHandler } from './handlers';
+
+import { CreateProductTransformer } from './transformers';
+
+import { PersistCreateProductPublisher } from '../publishers';
+
+import { PersistCreateProductSubscriber } from '../subscribers';
+
+import {
+  UomService,
+  ImagesService,
+  UOMBarcodeService,
+  AddonService,
+  ProductsService,
+} from './services';
+
 import { RmqModule } from 'src/rmq/rmq.module';
-import { PersistCreateProductSubscriber } from '../subscribers/persist_product_create.subscriber';
-import { UomService } from './services/uom.service';
-import { ImagesService } from './services/images.service';
-import { UOMBarcodeService } from './services/barcode.service';
-import { PersistCreateProductHandler } from './handlers/persist-create-product.handler';
-import { AddonService } from './services/addons.service';
 
 @Module({
   controllers: [ProductsController, PersistCreateProductSubscriber],
