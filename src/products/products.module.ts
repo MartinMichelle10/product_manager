@@ -24,9 +24,9 @@ import { CreateProductHandler, PersistCreateProductHandler } from './handlers';
 
 import { CreateProductTransformer } from './transformers';
 
-import { PersistCreateProductPublisher } from '../publishers';
+import { PersistCreateProductPublisher } from './publishers';
 
-import { PersistCreateProductSubscriber } from '../subscribers';
+import { PersistCreateProductSubscriber } from './subscribers';
 
 import {
   UomService,
