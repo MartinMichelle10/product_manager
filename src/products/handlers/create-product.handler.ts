@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from '../dto';
 import { ProductsService } from '../services/products.service';
 import { CreateProductTransformer } from '../transformers/create_product.transformer';
-import { PersistCreateProductPublisher } from 'src/products/publishers/product-persister.publisher';
+import { PersistCreateProductPublisher } from '../../products/publishers/product-persister.publisher';
 
 @Injectable()
 export class CreateProductHandler {

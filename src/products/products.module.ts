@@ -36,7 +36,7 @@ import {
   ProductsService,
 } from './services';
 
-import { RmqModule } from 'src/rmq/rmq.module';
+import { RmqModule } from '../rmq/rmq.module';
 
 @Module({
   controllers: [ProductsController, PersistCreateProductSubscriber],

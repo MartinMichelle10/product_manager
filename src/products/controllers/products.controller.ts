@@ -13,7 +13,7 @@ import { ProductsService } from '../services/products.service';
 
 import { CreateProductDto, UpdateProductDto } from '../dto';
 
-import { UpdateInterceptor } from 'src/middleware/update.interceptor';
+import { UpdateInterceptor } from '../../middleware/update.interceptor';
 import { CreateProductHandler } from '../handlers/create-product.handler';
 
 @Controller('products')
@@ -47,6 +47,7 @@ export class ProductsController {
     }
   }
 
+  // TODO: update
   @Patch(':id')
   @UseInterceptors(new UpdateInterceptor('Updated'))
   update(

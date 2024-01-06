@@ -26,6 +26,7 @@ export class PersistCreateProductHandler {
   }
 
   private async processUOM(uom, product) {
+    // TODO: handle transactions
     try {
       const [insertedImages, insertedBarcodes, insertedAddon] =
         await Promise.all([
