@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UOM } from '../entities/uom.entity';
-import { BarcodeType } from '../entities/enum/barcode.enum';
 
 @Injectable()
 export class UOMSeeder {
@@ -16,12 +15,10 @@ export class UOMSeeder {
       {
         id: 1,
         name: 'UOM 1',
+        price: 50,
         product: {
           id: 1,
           name: 'Product 1',
-          cost: 10,
-          price: 20,
-          initial_qty: 10,
         },
         addon: {
           id: 1,
@@ -43,7 +40,6 @@ export class UOMSeeder {
         barcodes: [
           {
             barcode: '376JSHD3',
-            type_barcode: BarcodeType.CODE128,
             uom: {
               id: 2,
               name: 'UOM 2',
@@ -56,12 +52,10 @@ export class UOMSeeder {
       {
         id: 2,
         name: 'UOM 2',
+        price: 30,
         product: {
           id: 2,
           name: 'Product 2',
-          cost: 20,
-          price: 50,
-          initial_qty: 1,
         },
         addon: {
           id: 2,
@@ -83,7 +77,6 @@ export class UOMSeeder {
         barcodes: [
           {
             barcode: '763JSHD3',
-            type_barcode: BarcodeType.CODE39,
             uom: {
               id: 1,
               name: 'UOM 1',
@@ -95,7 +88,6 @@ export class UOMSeeder {
       },
       // Add more seed data as needed
     ];
-
     await Promise.all(
       examplesToSeed.map((example) => this.repository.save(example)),
     );

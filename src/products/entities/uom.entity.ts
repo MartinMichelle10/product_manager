@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Product } from './product.entity';
 import { UOMImage } from './uom-image.entity';
-import { UOMBarcodeRelation } from './uom-barcode-relation.entity';
+import { UOMBarcode } from './uom-barcode.entity';
 import { Addon } from './addon.entity';
 
 @Entity()
@@ -20,16 +20,19 @@ export class UOM {
   @Column()
   name: string;
 
+  @Column()
+  price: number;
+
   @ManyToOne(() => Product, (product) => product.uoms, { onDelete: 'CASCADE' })
   product: Product;
 
   @OneToMany(() => UOMImage, (image) => image.uom, { onDelete: 'CASCADE' })
   images: UOMImage[];
 
-  @OneToMany(() => UOMBarcodeRelation, (barcode) => barcode.uom, {
+  @OneToMany(() => UOMBarcode, (barcode) => barcode.uom, {
     onDelete: 'CASCADE',
   })
-  barcodes: UOMBarcodeRelation[];
+  barcodes: UOMBarcode[];
 
   @ManyToOne(() => Addon, (addon) => addon.uoms, { onDelete: 'CASCADE' })
   addon: Addon;

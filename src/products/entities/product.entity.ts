@@ -16,15 +16,6 @@ export class Product {
   @Column()
   name: string;
 
-  @Column()
-  cost: number;
-
-  @Column()
-  price: number;
-
-  @Column()
-  initial_qty: number;
-
   @OneToMany(() => UOM, (uom) => uom.product, { onDelete: 'CASCADE' })
   uoms: UOM[];
 }

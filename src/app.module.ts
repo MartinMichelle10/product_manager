@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/entities/product.entity';
 import { Addon } from './products/entities/addon.entity';
 import { UOM } from './products/entities/uom.entity';
-import { UOMBarcodeRelation } from './products/entities/uom-barcode-relation.entity';
+import { UOMBarcode } from './products/entities/uom-barcode.entity';
 import { AddonItem } from './products/entities/addon-item.entity';
 import { UOMImage } from './products/entities/uom-image.entity';
 import { ProductSeeder } from './products/seeders/product.seeder';
@@ -26,7 +26,7 @@ import { ImageSeeder } from './products/seeders/images.seeder';
       username: 'root',
       password: 'rootroot',
       database: 'product_crud',
-      entities: [Product, AddonItem, Addon, UOM, UOMBarcodeRelation, UOMImage],
+      entities: [Product, AddonItem, Addon, UOM, UOMBarcode, UOMImage],
       synchronize: true,
     }),
   ],
