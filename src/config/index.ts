@@ -24,10 +24,11 @@ const config = {
   logger: {
     level: process.env.LOG_LEVEL || 'debug',
   },
+  /// 127.0.0.1
   rabbitMQ: {
     uris: process.env.RABBIT_MQ_URIS
       ? process.env.RABBIT_MQ_URIS.split(',')
-      : ['amqp://guest:guest@localhost:5672'],
+      : ['amqp://guest:guest@0.0.0.0:5672'],
   },
   apm: {
     isEnabled: process.env.APM_ENABLED

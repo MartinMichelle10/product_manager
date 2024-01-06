@@ -11,22 +11,22 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from '../services/products.service';
 
-import { CreateProductDto, UpdateProductDto } from '../dto';
+import { UpdateProductDto } from '../dto';
 
 import { UpdateInterceptor } from '../../middleware/update.interceptor';
-import { CreateProductHandler } from '../handlers/create-product.handler';
+import { ProductHandler } from '../handlers/product.handler';
 
 @Controller('products')
 export class ProductsController {
   constructor(
     private readonly productsService: ProductsService,
-    private readonly createProductHandler: CreateProductHandler,
+    private readonly createProductHandler: ProductHandler,
   ) {}
 
   @Post()
   @UseInterceptors(new UpdateInterceptor('Created'))
-  create(@Body(new ValidationPipe()) createProductDto: CreateProductDto) {
-    return this.createProductHandler.handle(createProductDto);
+  create(@Body(new ValidationPipe()) createProductDto: UpdateProductDto) {
+    return this.createProductHandler.handleCreate(createProductDto);
   }
 
   @Get()
@@ -51,11 +51,11 @@ export class ProductsController {
   @Patch(':id')
   @UseInterceptors(new UpdateInterceptor('Updated'))
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body(new ValidationPipe()) updateProductDto: UpdateProductDto,
   ) {
     try {
-      return this.productsService.update(+id, updateProductDto);
+      return this.createProductHandler.handleUpdate(id, updateProductDto);
     } catch (error) {
       throw error;
     }

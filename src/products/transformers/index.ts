@@ -1,1 +1,1 @@
-export * from './create_product.transformer';
+export * from './product.transformer';

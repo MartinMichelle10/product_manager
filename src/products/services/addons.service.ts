@@ -14,4 +14,8 @@ export class AddonService {
   create(addon: AddonDto) {
     return this.addonRepository.save(addon);
   }
+
+  update(addon: Addon) {
+    return this.addonRepository.update(addon.id, addon);
+  }
 }

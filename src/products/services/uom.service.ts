@@ -14,4 +14,11 @@ export class UomService {
     console.log(uom);
     return this.uomRepository.save(uom);
   }
+  update(uoms: UOM[]) {
+    for (const data of uoms) {
+      const _oum = { name: data.name, price: data.price };
+      this.uomRepository.update(data.id, _oum);
+    }
+    return true;
+  }
 }

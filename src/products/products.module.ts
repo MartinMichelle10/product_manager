@@ -20,13 +20,20 @@ import {
   ImageSeeder,
 } from './seeders';
 
-import { CreateProductHandler, PersistCreateProductHandler } from './handlers';
+import {
+  ProductHandler,
+  PersistCreateProductHandler,
+  PersistUpdateProductHandler,
+} from './handlers';
 
-import { CreateProductTransformer } from './transformers';
+import { ProductTransformer } from './transformers';
 
-import { PersistCreateProductPublisher } from './publishers';
+import { PersistProductPublisher } from './publishers';
 
-import { PersistCreateProductSubscriber } from './subscribers';
+import {
+  PersistCreateProductSubscriber,
+  PersistUpdateProductSubscriber,
+} from './subscribers';
 
 import {
   UomService,
@@ -39,7 +46,11 @@ import {
 import { RmqModule } from '../rmq/rmq.module';
 
 @Module({
-  controllers: [ProductsController, PersistCreateProductSubscriber],
+  controllers: [
+    ProductsController,
+    PersistCreateProductSubscriber,
+    PersistUpdateProductSubscriber,
+  ],
   providers: [
     ProductsService,
     UOMBarcodeService,
@@ -52,10 +63,10 @@ import { RmqModule } from '../rmq/rmq.module';
     BarcodeSeeder,
     UOMSeeder,
     ImageSeeder,
-    CreateProductHandler,
-    CreateProductTransformer,
-    PersistCreateProductPublisher,
-    PersistCreateProductSubscriber,
+    ProductHandler,
+    ProductTransformer,
+    PersistProductPublisher,
+    PersistUpdateProductHandler,
     PersistCreateProductHandler,
   ],
   imports: [
