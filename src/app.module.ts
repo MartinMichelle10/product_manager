@@ -15,17 +15,18 @@ import { AddonSeeder } from './products/seeders/addon.seeder';
 import { BarcodeSeeder } from './products/seeders/barcodes.seeder';
 import { UOMSeeder } from './products/seeders/uom.seeder';
 import { ImageSeeder } from './products/seeders/images.seeder';
+import config from './config/index';
 
 @Module({
   imports: [
     ProductsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: config.apm.database.host,
       port: 3306,
-      username: 'root',
-      password: 'rootroot',
-      database: 'product_crud',
+      username: config.apm.database.username,
+      password: config.apm.database.password,
+      database: config.apm.database.database,
       entities: [Product, AddonItem, Addon, UOM, UOMBarcode, UOMImage],
       synchronize: true,
     }),
@@ -53,12 +54,5 @@ export class AppModule implements OnApplicationBootstrap {
       await this.barcodeSeeder.seed(),
       await this.imageSeeder.seed(),
     ]);
-
-    // await this.productSeeder.seed();
-    // await this.addonItemSeeder.seed();
-    // await this.addonSeeder.seed();
-    // await this.barcodeSeeder.seed();
-    // await this.uOMSeeder.seed();
-    // await this.imageSeeder.seed();
   }
 }

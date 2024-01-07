@@ -1,6 +1,9 @@
 import { hostname } from 'os';
 
 import { PRODUCTION } from './env';
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('./../../package.json');
@@ -24,10 +27,11 @@ const config = {
   logger: {
     level: process.env.LOG_LEVEL || 'debug',
   },
+  /// 127.0.0.1
   rabbitMQ: {
-    uris: process.env.RABBIT_MQ_URIS
-      ? process.env.RABBIT_MQ_URIS.split(',')
-      : ['amqp://guest:guest@localhost:5672'],
+    uris: process.env.RABBITMQ_URL
+      ? process.env.RABBITMQ_URL.split(',')
+      : ['amqp://guest:guest@0.0.0.0:5672'],
   },
   apm: {
     isEnabled: process.env.APM_ENABLED
@@ -46,17 +50,17 @@ const config = {
       },
     },
     connection: {
-      serviceName: 'session-worker',
+      serviceName: 'product_manager',
       serverUrl: `${process.env.APM_URL}:${process.env.APM_PORT}`,
       environment: process.env.NODE_ENV,
     },
     database: {
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'rootroot',
-      database: 'product_crud',
+      type: process.env.DIALECT + '',
+      host: process.env.HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.USER_NAME || 'root',
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false, // set to true for auto-migration in development, but use with caution in production
       migrationsTableName: 'typeorm_migrations',

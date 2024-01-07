@@ -4,11 +4,19 @@ import { ExchangesNames } from '../../rmq/config/exchanges';
 import { ROUTING_KEYS } from '../../rmq/config/routing-keys';
 
 @Injectable()
-export class PersistCreateProductPublisher extends BasePublisher {
-  send(dto: any) {
+export class PersistProductPublisher extends BasePublisher {
+  sendCreate(dto: any) {
     return super.publish<any>(
       ExchangesNames.PRODUCT_MANAGER,
       ROUTING_KEYS.PERSIST_CREATE_PRODUCT_REQUESTED,
+      dto,
+      {},
+    );
+  }
+  sendUpdate(dto: any) {
+    return super.publish<any>(
+      ExchangesNames.PRODUCT_MANAGER,
+      ROUTING_KEYS.PERSIST_UPDATE_PRODUCT_REQUESTED,
       dto,
       {},
     );

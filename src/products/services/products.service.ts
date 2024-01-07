@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ProductDto, UpdateProductDto } from '../dto';
+import { ProductDto } from '../dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../entities/product.entity';
@@ -21,15 +21,15 @@ export class ProductsService {
     });
   }
 
-  getProductById(id: number) {
+  async getProductById(id: number) {
     return this.productRepository.findOne({
       where: { id },
       relations: ['uoms', 'uoms.barcodes', 'uoms.images', 'uoms.addon'],
     });
   }
 
-  update(productId: number, updateProductDto: UpdateProductDto) {
-    return this.productRepository.update({ id: productId }, updateProductDto);
+  update(productId: number, updateProductDto: ProductDto) {
+    return this.productRepository.update(productId, updateProductDto);
   }
 
   delete(productId: number) {
