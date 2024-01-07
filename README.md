@@ -53,6 +53,11 @@ Update the details of a product, including its UOMs, Barcodes, and Images, by se
 
 Delete a product and ensure the cascading deletion of associated UOMs, Barcodes, Images, Addons, and Addon Items by sending a DELETE request to the `/products/{productId}` endpoint.
 
+## Synchronous and Asynchronous Operations
+
+This application employs the RabbitMQ pub/sub model to handle both synchronous and asynchronous operations. Synchronous operations ensure real-time responsiveness, while asynchronous tasks are offloaded to RabbitMQ for improved scalability and performance.
+
+
 ## Expectations
 
 This application showcases a solid understanding of relational database design, CRUD operations, and the ability to handle complex relationships between tables. The candidate is expected to navigate the API endpoints as documented and perform CRUD operations seamlessly.
